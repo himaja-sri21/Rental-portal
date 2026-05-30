@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Agreements</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f4f7f5;
+            padding:40px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+        }
+
+        th, td{
+            padding:15px;
+            border:1px solid #ddd;
+        }
+
+        th{
+            background:#2e7d32;
+            color:white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>Rental Agreements</h1>
+
+<a href="/dashboard">Back</a>
+
+<br><br>
+
+<table>
+
+<tr>
+
+    <th>ID</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+
+</tr>
+
+{% for agreement in agreements %}
+
+<tr>
+
+    <td>{{ agreement.id }}</td>
+    <td>{{ agreement.start_date }}</td>
+    <td>{{ agreement.end_date }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>
