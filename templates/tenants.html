@@ -1,132 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base_dashboard.html" %}
 
-<head>
+{% block content %}
 
-    <meta charset="UTF-8">
+<div class="topbar">
+    <div>
+        <h1>👤 Tenants</h1>
+        <p>Manage tenant information and records</p>
+    </div>
+</div>
 
-    <title>Tenants</title>
+<div class="cards">
 
-    <style>
+{% for tenant in tenants %}
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial;
-        }
+<div class="card">
 
-        body{
-            background:#f4f7f5;
-            padding:40px;
-        }
+```
+<h2>{{ tenant.name }}</h2>
 
-        h1{
-            margin-bottom:30px;
-            color:#2e7d32;
-        }
+<p>
+    Tenant ID: {{ tenant.id }}
+</p>
 
-        table{
+<p>
+    Email: {{ tenant.email }}
+</p>
 
-            width:100%;
+<div class="growth">
+    Role: {{ tenant.role }}
+</div>
+```
 
-            border-collapse:collapse;
+</div>
 
-            background:white;
+{% endfor %}
 
-            border-radius:15px;
+</div>
 
-            overflow:hidden;
-
-            box-shadow:0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        th{
-
-            background:#2e7d32;
-
-            color:white;
-
-            padding:15px;
-
-            text-align:left;
-        }
-
-        td{
-
-            padding:15px;
-
-            border-bottom:1px solid #ddd;
-        }
-
-        tr:hover{
-
-            background:#f1f1f1;
-        }
-
-        .back-btn{
-
-            display:inline-block;
-
-            margin-bottom:20px;
-
-            text-decoration:none;
-
-            background:#2e7d32;
-
-            color:white;
-
-            padding:10px 20px;
-
-            border-radius:8px;
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-    <a href="/dashboard" class="back-btn">
-        Back to Dashboard
-    </a>
-
-    <h1>
-        Tenant Information
-    </h1>
-
-    <table>
-
-        <tr>
-
-            <th>ID</th>
-
-            <th>Name</th>
-
-            <th>Email</th>
-
-            <th>Role</th>
-
-        </tr>
-
-        {% for tenant in tenants %}
-
-        <tr>
-
-            <td>{{ tenant.id }}</td>
-
-            <td>{{ tenant.name }}</td>
-
-            <td>{{ tenant.email }}</td>
-
-            <td>{{ tenant.role }}</td>
-
-        </tr>
-
-        {% endfor %}
-
-    </table>
-
-</body>
-
-</html>
+{% endblock %}

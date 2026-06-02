@@ -229,6 +229,58 @@
             font-weight:bold;
         }
 
+        .search-section{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.search-section select,
+.search-section input{
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:16px;
+}
+
+.search-section select{
+    width:200px;
+}
+
+.search-section input{
+    flex:1;
+}
+
+.search-section button{
+
+    background:#2e7d32;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 30px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
     </style>
 
 </head>
@@ -275,19 +327,19 @@
             DATA
         </div>
 
-        <a href="#++">
+        <a href="/properties-page">
             Properties
         </a>
 
-        <a href="#">
+        <a href="/transactions-page">
             Transactions
         </a>
 
-        <a href="#">
+        <a href="/reports-page">
             Reports
         </a>
 
-        <a href="#">
+        <a href="/login">
             Logout
         </a>
 
@@ -362,76 +414,68 @@
         </div>
 
         <!-- PROPERTY SECTION -->
+        <form action="/search" method="GET" class="search-section">
 
-        <h2 class="section-title">
-            Indian Properties
-        </h2>
+    <select name="city">
+        <option value="">All Cities</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Guntur">Guntur</option>
+    </select>
 
-        <div class="properties">
+    <input
+        type="text"
+        name="address"
+        placeholder="Search locality or address">
 
-            <!-- PROPERTY 1 -->
+    <button type="submit">
+        Search
+    </button>
 
-            <div class="property-card">
+</form>
 
-                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=1200&auto=format&fit=crop">
+<h2 class="section-title">
+    Properties
+</h2>
 
-                <div class="property-info">
+<div class="properties">
 
-                    <h3>Luxury Apartment</h3>
+{% for property in properties %}
 
-                    <p>Hyderabad, Telangana</p>
+<div class="property-card">
 
-                    <div class="price">
-                        ₹35,000/month
-                    </div>
+    <div class="property-info">
 
-                </div>
+        <h3>{{ property.address }}</h3>
 
-            </div>
+        <p>Status: {{ property.status }}</p>
 
-            <!-- PROPERTY 2 -->
-
-            <div class="property-card">
-
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop">
-
-                <div class="property-info">
-
-                    <h3>Independent House</h3>
-
-                    <p>Bangalore, Karnataka</p>
-
-                    <div class="price">
-                        ₹50,000/month
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- PROPERTY 3 -->
-
-            <div class="property-card">
-
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop">
-
-                <div class="property-info">
-
-                    <h3>2BHK Flat</h3>
-
-                    <p>Mumbai, Maharashtra</p>
-
-                    <div class="price">
-                        ₹28,000/month
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div class="price">
+            ₹{{ property.rent_amount }}/month
         </div>
 
     </div>
+
+    <a href="/book/{{ property.id }}"
+   style="
+        display:block;
+        margin-top:15px;
+        background:#2e7d32;
+        color:white;
+        text-align:center;
+        padding:12px;
+        border-radius:10px;
+        text-decoration:none;
+   ">
+   Book Now
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
 
 </body>
 

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rental Portal - Reports</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f6f9;
+    }
+
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card h2 {
+      margin: 10px 0;
+      color: #2c3e50;
+    }
+
+    .card p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #27ae60;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #34495e;
+      color: white;
+    }
+
+    tr:hover {
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  Rental Portal Reports Dashboard
+</header>
+
+<div class="container">
+
+  <!-- Summary Cards -->
+  <div class="cards">
+    <div class="card">
+      <h2>Total Users</h2>
+      <p id="usersCount">0</p>
+    </div>
+
+    <div class="card">
+      <h2>Total Properties</h2>
+      <p id="propertyCount">0</p>
+    </div>
+
+    <div class="card">
+      <h2>Total Bookings</h2>
+      <p id="bookingCount">0</p>
+    </div>
+
+    <div class="card">
+      <h2>Total Revenue</h2>
+      <p id="revenue">₹0</p>
+    </div>
+  </div>
+
+  <!-- Sample Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Property</th>
+        <th>Tenant</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+
+    <tbody id="reportTable">
+      <!-- Data will load here -->
+    </tbody>
+  </table>
+
+</div>
+
+<script>
+  // Dummy data (later connect Flask API)
+  const data = {
+    users: 3,
+    properties: 3,
+    bookings: 1,
+    revenue: 45000,
+
+    bookingsList: [
+      {id: 1, property: "2BHK Apartment", tenant: "Bhav", status: "Confirmed"},
+      {id: 2, property: "Villa", tenant: "Dora", status: "Pending"},
+    ]
+  };
+
+  // Set counts
+  document.getElementById("usersCount").innerText = data.users;
+  document.getElementById("propertyCount").innerText = data.properties;
+  document.getElementById("bookingCount").innerText = data.bookings;
+  document.getElementById("revenue").innerText = "₹" + data.revenue;
+
+  // Load table
+  const table = document.getElementById("reportTable");
+
+  data.bookingsList.forEach(item => {
+    const row = `
+      <tr>
+        <td>${item.id}</td>
+        <td>${item.property}</td>
+        <td>${item.tenant}</td>
+        <td>${item.status}</td>
+      </tr>
+    `;
+    table.innerHTML += row;
+  });
+</script>
+
+</body>
+</html>

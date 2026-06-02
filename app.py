@@ -17,6 +17,7 @@ from models.property_model import Property
 from models.payment_model import Payment
 from models.agreement_model import Agreement
 from models.maintenance_model import Maintenance
+from flask import request
 
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'super-secret-key'
@@ -46,19 +47,6 @@ def home():
 
     return render_template('index.html')
 
-
-@app.route('/login')
-def login_page():
-
-    return render_template('login.html')
-
-
-@app.route('/register')
-def register_page():
-
-    return render_template('register.html')
-
-
 @app.route('/dashboard')
 def dashboard_page():
 
@@ -66,10 +54,13 @@ def dashboard_page():
 
     total_tenants = User.query.filter_by(role='tenant').count()
 
+    properties = Property.query.all()
+
     return render_template(
         'dashboard.html',
         total_properties=total_properties,
-        total_tenants=total_tenants
+        total_tenants=total_tenants,
+        properties=properties
     )
     
 @app.route('/payments-page')
@@ -125,6 +116,84 @@ def landlords_page():
         landlords=landlords
     )
 
+@app.route('/properties-page')
+def properties_page():
+
+    properties = Property.query.all()
+
+    return render_template(
+        'properties.html',
+        properties=properties
+    )
+
+@app.route('/transactions-page')
+def transactions_page():
+    return render_template('transactions.html')
+
+@app.route('/reports-page')
+def reports_page():
+    return render_template('reports.html')
+
+from flask import request
+
+@app.route('/search')
+def search():
+
+    city = request.args.get('city', '')
+    address = request.args.get('address', '')
+
+    query = Property.query
+
+    if city:
+        query = query.filter(Property.address.contains(city))
+
+    if address:
+        query = query.filter(Property.address.contains(address))
+
+    properties = query.all()
+
+    return render_template(
+        'search_results.html',
+        properties=properties,
+        city=city
+    )
+    
+@app.route('/book/<int:property_id>')
+def book_property(property_id):
+
+    tenant_id = 1  # later replace with session login user
+
+    booking = Booking(
+        property_id=property_id,
+        tenant_id=tenant_id,
+        status="Confirmed"
+    )
+
+    db.session.add(booking)
+    db.session.commit()
+
+    return "Property booked successfully!"
+    
+class Booking(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    property_id = db.Column(db.Integer, db.ForeignKey('property.id'), nullable=False)
+    tenant_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    start_date = db.Column(db.String(50))
+    end_date = db.Column(db.String(50))
+
+    status = db.Column(db.String(20), default="Pending")
+    
+@app.route('/all-users')
+def all_users():
+
+    users = User.query.all()
+
+    for user in users:
+        print(user.name, user.role)
+
+    return "Check terminal"
     
 if __name__ == '__main__':
 

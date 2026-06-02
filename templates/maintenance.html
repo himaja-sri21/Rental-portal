@@ -1,70 +1,30 @@
-<!DOCTYPE html>
-<html>
+{% extends "base_dashboard.html" %}
 
-<head>
+{% block content %}
 
-    <title>Maintenance</title>
+<div class="topbar">
+    <div>
+        <h1>🔧 Maintenance Requests</h1>
+        <p>Track and manage maintenance issues</p>
+    </div>
+</div>
 
-    <style>
-
-        body{
-            font-family:Arial;
-            background:#f4f7f5;
-            padding:40px;
-        }
-
-        table{
-            width:100%;
-            border-collapse:collapse;
-            background:white;
-        }
-
-        th, td{
-            padding:15px;
-            border:1px solid #ddd;
-        }
-
-        th{
-            background:#2e7d32;
-            color:white;
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-<h1>Maintenance Requests</h1>
-
-<a href="/dashboard">Back</a>
-
-<br><br>
-
-<table>
-
-<tr>
-
-    <th>ID</th>
-    <th>Issue</th>
-    <th>Status</th>
-
-</tr>
+<div class="cards">
 
 {% for maintenance in maintenances %}
 
-<tr>
+<div class="card">
+    <h2>Request #{{ maintenance.id }}</h2>
 
-    <td>{{ maintenance.id }}</td>
-    <td>{{ maintenance.issue }}</td>
-    <td>{{ maintenance.status }}</td>
+    <p><strong>Issue:</strong> {{ maintenance.issue }}</p>
 
-</tr>
+    <div class="growth">
+        Status: {{ maintenance.status }}
+    </div>
+</div>
 
 {% endfor %}
 
-</table>
+</div>
 
-</body>
-
-</html>
+{% endblock %}

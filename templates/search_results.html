@@ -1,0 +1,41 @@
+{% extends "base_dashboard.html" %}
+
+{% block content %}
+
+<div class="topbar">
+    <div>
+        <h1>Search Results</h1>
+        <p>Results for "{{ address }}"</p>
+    </div>
+</div>
+
+<div class="cards">
+
+{% for property in properties %}
+
+<div class="card">
+
+    <h2>{{ property.address }}</h2>
+
+    <p>Rent: ₹{{ property.rent_amount }}</p>
+
+    <div class="growth">
+        {{ property.status }}
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% if not properties %}
+
+<div class="card">
+    <h2>No Properties Found</h2>
+    <p>Try another search.</p>
+</div>
+
+{% endif %}
+
+{% endblock %}

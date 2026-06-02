@@ -3,33 +3,26 @@
 {% block content %}
 
 <div class="topbar">
-
     <div>
-
-        <h1>Payments</h1>
-
-        <p>Manage rental payments</p>
-
+        <h1>🏠 Landlords</h1>
+        <p>Property owner information</p>
     </div>
-
-    <h3>Welcome Admin</h3>
-
 </div>
 
 <div class="cards">
 
-{% for payment in payments %}
+{% for landlord in landlords %}
 
 <div class="card">
 
-    <p>Payment ID</p>
+    <h2>{{ landlord.name }}</h2>
 
-    <h2>₹{{ payment.amount }}</h2>
+    <p>
+        ID: {{ landlord.id }}
+    </p>
 
     <div class="growth">
-
-        {{ payment.status }}
-
+        {{ landlord.email }}
     </div>
 
 </div>

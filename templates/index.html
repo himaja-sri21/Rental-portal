@@ -4,7 +4,6 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Rental Portal</title>
@@ -15,13 +14,11 @@
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family:Arial, sans-serif;
+            font-family:'Segoe UI',sans-serif;
         }
 
         body{
-
-            height:100vh;
-            overflow:hidden;
+            min-height:100vh;
         }
 
         .hero{
@@ -30,8 +27,9 @@
             height:100vh;
 
             background:
-            linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-            url('https://tse4.mm.bing.net/th/id/OIP.T9EXKIY3SJVKF5zhfG5cowHaFj?pid=Api&P=0&h=180');
+            linear-gradient(rgba(0,0,0,0.55),
+            rgba(0,0,0,0.55)),
+            url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=80');
 
             background-size:cover;
             background-position:center;
@@ -40,6 +38,8 @@
 
             color:white;
         }
+
+        /* NAVBAR */
 
         .navbar{
 
@@ -53,28 +53,34 @@
 
         .logo{
 
-            font-size:32px;
+            font-size:34px;
             font-weight:bold;
         }
 
         .nav-buttons{
 
             display:flex;
-            gap:20px;
+            gap:15px;
         }
 
         .nav-buttons a{
 
             text-decoration:none;
             color:white;
-            padding:10px 20px;
-            border-radius:8px;
+            padding:12px 22px;
+            border-radius:10px;
             transition:0.3s;
         }
 
         .login-btn{
 
             border:1px solid white;
+        }
+
+        .login-btn:hover{
+
+            background:white;
+            color:black;
         }
 
         .start-btn{
@@ -87,33 +93,112 @@
             background:#6d28d9;
         }
 
+        /* HERO CONTENT */
+
         .content{
 
             position:absolute;
+
             top:50%;
-            left:10%;
+            left:8%;
 
             transform:translateY(-50%);
         }
 
         .content h1{
 
-            font-size:72px;
-            width:700px;
+            font-size:70px;
+
+            max-width:750px;
+
             line-height:1.1;
         }
 
         .content p{
 
             margin-top:20px;
+
             font-size:20px;
-            width:600px;
-            line-height:1.5;
+
+            max-width:700px;
+
+            line-height:1.6;
+
+            color:#e5e5e5;
         }
 
-        .content button{
+        /* SEARCH BAR */
+
+        .search-box{
 
             margin-top:35px;
+
+            width:900px;
+
+            display:flex;
+
+            background:white;
+
+            border-radius:15px;
+
+            overflow:hidden;
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .search-box select{
+
+            width:180px;
+
+            border:none;
+
+            outline:none;
+
+            padding:18px;
+
+            font-size:16px;
+        }
+
+        .search-box input{
+
+            flex:1;
+
+            border:none;
+
+            outline:none;
+
+            padding:18px;
+
+            font-size:16px;
+        }
+
+        .search-btn{
+
+            width:180px;
+
+            border:none;
+
+            background:#ef4444;
+
+            color:white;
+
+            font-size:18px;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .search-btn:hover{
+
+            background:#dc2626;
+        }
+
+        /* GET STARTED BUTTON */
+
+        .main-btn{
+
+            margin-top:30px;
 
             padding:15px 35px;
 
@@ -128,11 +213,31 @@
             border-radius:10px;
 
             cursor:pointer;
+
+            transition:0.3s;
         }
 
-        .content button:hover{
+        .main-btn:hover{
 
             background:#6d28d9;
+        }
+
+        @media(max-width:1000px){
+
+            .content h1{
+                font-size:50px;
+            }
+
+            .search-box{
+                width:100%;
+                flex-direction:column;
+            }
+
+            .search-box select,
+            .search-box input,
+            .search-btn{
+                width:100%;
+            }
         }
 
     </style>
@@ -146,7 +251,7 @@
         <div class="navbar">
 
             <div class="logo">
-                RentalPortal
+                🏠 RentalPortal
             </div>
 
             <div class="nav-buttons">
@@ -156,7 +261,7 @@
                 </a>
 
                 <a href="/register" class="start-btn">
-                    Get Started
+                    Register
                 </a>
 
             </div>
@@ -166,15 +271,18 @@
         <div class="content">
 
             <h1>
-                Manage rentals and tenants digitally
+                Find and Manage Rental Properties Easily
             </h1>
 
             <p>
-                Simplify rental agreements, payments, maintenance requests,
-                and tenant onboarding with one secure platform.
+                Search properties, manage tenants, track payments,
+                handle maintenance requests and simplify rental
+                management from one secure platform.
             </p>
 
-            <button onclick="window.location.href='/register'">
+            <button
+                class="main-btn"
+                onclick="window.location.href='/register'">
 
                 Get Started
 

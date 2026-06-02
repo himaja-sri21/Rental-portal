@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rental Portal</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#f4f7f5;
+            display:flex;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+
+            width:260px;
+            height:100vh;
+
+            background:white;
+
+            position:fixed;
+
+            padding:30px 20px;
+
+            border-right:1px solid #ddd;
+        }
+
+        .logo{
+
+            font-size:32px;
+            font-weight:bold;
+
+            color:#2e7d32;
+
+            margin-bottom:40px;
+        }
+
+        .menu-title{
+
+            color:gray;
+
+            margin-top:25px;
+            margin-bottom:15px;
+
+            font-size:14px;
+        }
+
+        .sidebar a{
+
+            display:block;
+
+            text-decoration:none;
+
+            color:#333;
+
+            padding:14px;
+
+            border-radius:10px;
+
+            margin-bottom:10px;
+
+            transition:0.3s;
+        }
+
+        .sidebar a:hover{
+
+            background:#dff3e2;
+        }
+
+        .active{
+
+            background:#dff3e2;
+        }
+
+        /* MAIN */
+
+        .main{
+
+            margin-left:260px;
+
+            width:100%;
+
+            padding:30px;
+        }
+
+        .topbar{
+
+            background:white;
+
+            padding:20px 30px;
+
+            border-radius:20px;
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:30px;
+        }
+
+        .topbar h1{
+
+            font-size:30px;
+        }
+
+        /* CARDS */
+
+        .cards{
+
+            display:grid;
+
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+            gap:20px;
+        }
+
+        .card{
+
+            background:white;
+
+            padding:25px;
+
+            border-radius:20px;
+
+            box-shadow:0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .card p{
+
+            color:gray;
+        }
+
+        .card h2{
+
+            margin-top:10px;
+        }
+
+        .growth{
+
+            margin-top:10px;
+
+            color:#2e7d32;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            RentalPortal
+        </div>
+
+        <div class="menu-title">
+            MENU
+        </div>
+
+        <a href="/dashboard">
+            Home
+        </a>
+
+        <a href="/payments-page">
+            Payments
+        </a>
+
+        <a href="/maintenance-page">
+            Maintenance
+        </a>
+
+        <a href="/agreements-page">
+            Agreements
+        </a>
+
+        <a href="/tenants-page">
+            Tenants
+        </a>
+
+        <a href="/landlords-page">
+            Landlords
+        </a>
+
+        <div class="menu-title">
+            DATA
+        </div>
+
+        <a href="/properties-page">
+    Properties
+        </a>
+
+        <a href="/transactions-page">
+          Transactions
+        </a>
+
+        <a href="/reports-page">
+    Reports
+        </a>
+        <a href="/login">
+            Logout
+        </a>
+
+    </div>
+
+    <!-- MAIN CONTENT -->
+
+    <div class="main">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+</body>
+
+</html>
