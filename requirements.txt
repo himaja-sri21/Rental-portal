@@ -4,3 +4,4 @@ Flask-Cors
 flasgger
 gunicorn
 razorpay
+flask-jwt-extended
