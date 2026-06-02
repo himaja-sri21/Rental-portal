@@ -52,21 +52,49 @@ def create_order():
 
 @payment_bp.route('/payments', methods=['POST'])
 def create_payment():
+    """
+    Create Payment
+    ---
+    tags:
+      - Payments
+    parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            amount:
+              type: integer
+            status:
+              type: string
+    responses:
+      200:
+        description: Payment created
+    """
 
-    data = request.json
+    try:
+        data = request.get_json()
 
-    payment = Payment(
-        amount=data['amount'],
-        status=data['status']
-    )
+        if not data:
+            return jsonify({"error": "No input data"}), 400
 
-    db.session.add(payment)
-    db.session.commit()
+        payment = Payment(
+            amount=data.get('amount'),
+            status=data.get('status')
+        )
 
-    return jsonify({
-        "message": "Payment added successfully"
-    })
+        db.session.add(payment)
+        db.session.commit()
 
+        return jsonify({
+            "message": "Payment created successfully",
+            "id": payment.id
+        }), 201
+
+    except Exception as e:
+        return jsonify({
+            "error": str(e)
+        }), 500
 
 
 @payment_bp.route('/payments', methods=['GET'])
